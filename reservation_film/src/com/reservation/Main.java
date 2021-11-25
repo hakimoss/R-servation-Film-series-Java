@@ -1,13 +1,13 @@
 package com.reservation;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,8 +27,8 @@ public class Main {
 		frame.getContentPane().add(topPanel);
 		
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setBounds(new Rectangle(0, 300, 800, 300));		
-		bottomPanel.setSize(800, 300);
+		bottomPanel.setBounds(new Rectangle(0, 300, 800, 100));		
+		bottomPanel.setSize(800, 100);
 		frame.getContentPane().add(bottomPanel);
 		
 		JLabel labelName = new JLabel("Inscrivez votre nom !");
@@ -47,17 +47,33 @@ public class Main {
 		bottomPanel.add(inputFilm);
 		inputFilm.setBounds(200, 735, 200, 30);
 		
+		JLabel labelSource = new JLabel("Inscrivez la sources");
+		bottomPanel.add(labelSource);
+		
+		String[] sourceString = { "Neflix", "Disney", "Prime", "Streaming", "Autres" };
+		JComboBox<String> sourcesList = new JComboBox(sourceString);
+		bottomPanel.add(sourcesList);
+		
+		JPanel lastPanel = new JPanel();
+		frame.getContentPane().add(lastPanel);
+		lastPanel.setBounds(new Rectangle(0, 400, 800, 100));		
+		lastPanel.setSize(800, 100);
+	
+		
 		JButton btnConfirmer = new JButton("Confirmer");
-		bottomPanel.add(btnConfirmer);
-
+		//bottomPanel.add(btnConfirmer);
+		lastPanel.add(btnConfirmer);
+		
+		
 		
 		
 		String[] columnNames = {
 				"Nom",
                 "Film/series",
+                "Source",
                 };
 		
-		Object[][] data = new Object[20][2];
+		Object[][] data = new Object[20][3];
 		
 		JTable table = new JTable(data, columnNames);
 		
@@ -73,11 +89,13 @@ public class Main {
 				//e.getSource();
 				String name = inputName.getText();
 				String aEcouter = inputFilm.getText();
+				String sourceFilm = (String) sourcesList.getSelectedItem();
 				for(int i = 0 ; i < data.length ; i++){
 					for(int j = 0 ; j < data[i].length; j++) {		
 						if(data[i][0] == null) {
 							data[i][0] = name;
 							data[i][1] = aEcouter;
+							data[i][2] = sourceFilm;
 							inputFilm.setText("");
 							inputName.setText("");
 							scrollPane.repaint();
