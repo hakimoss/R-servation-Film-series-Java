@@ -1,0 +1,74 @@
+package com.reservation;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		
+		JFrame frame = new JFrame("Réservation de film/séries");
+		frame.setSize(800,600);
+		//frame.setLayout(null);
+		
+		JPanel topPanel = new JPanel();
+		frame.getContentPane().add(topPanel);
+		topPanel.setSize(800, 300);
+		
+		JPanel bottomPanel = new JPanel();
+		frame.getContentPane().add(bottomPanel);
+		bottomPanel.setSize(800, 300);
+		
+		JLabel labelName = new JLabel("Inscrivez votre nom !");
+		labelName.setBounds(200, 350, 200, 30);
+		topPanel.add(labelName);
+		
+		JTextField inputName = new JTextField();	
+		topPanel.add(inputName);
+		inputName.setBounds(200, 375, 200, 30);
+		
+		JLabel labelFilm = new JLabel("Inscrivez le film/series");
+		labelFilm.setBounds(200, 410, 200, 30);
+		topPanel.add(labelFilm);
+	
+		JTextField inputFilm = new JTextField();
+		topPanel.add(inputFilm);
+		inputFilm.setBounds(200, 435, 200, 30);
+		
+		String[] columnNames = {"First Name",
+                "Last Name",
+                "Sport",
+                "# of Years",
+                "Vegetarian"};
+		
+		Object[][] data = {
+			    {"Kathy", "Smith",
+			     "Snowboarding", new Integer(5), new Boolean(false)},
+			    {"John", "Doe",
+			     "Rowing", new Integer(3), new Boolean(true)},
+			    {"Sue", "Black",
+			     "Knitting", new Integer(2), new Boolean(false)},
+			    {"Jane", "White",
+			     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Joe", "Brown",
+			     "Pool", new Integer(10), new Boolean(false)}
+			};
+		
+		JTable table = new JTable(data, columnNames);
+		
+		JScrollPane scrollPane = new JScrollPane(table);
+		
+		table.setFillsViewportHeight(true);
+		bottomPanel.add(scrollPane);
+		
+		frame.setVisible(true);
+
+	}
+
+}
