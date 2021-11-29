@@ -1,0 +1,31 @@
+package com.reservation;
+
+import java.awt.BorderLayout;
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import com.reservation.AVisioner.FilmModel;
+
+public class FilmSwing extends JFrame {
+	private JLabel moCle=new JLabel("Mot Clé");
+	private JTextField jTextFieldMC=new JTextField(12);
+	private JButton jButtonChercher= new JButton("Chercher");
+	private JTable jTableProduis=new JTable();
+	private FilmModel jtableModel;
+	
+	public void CatalogueSWING() {
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		JPanel jPanelN=new JPanel();
+		jPanelN.setLayout()new FlowLayout());
+		
+	}
+	
+	
+}

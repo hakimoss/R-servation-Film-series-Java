@@ -1,0 +1,19 @@
+package com.reservation.AVisioner;
+
+import java.util.List;
+
+public class CatalogueFilm implements ICatalogueFilm {
+
+	@Override
+	public List<Film> produitsParMc(String mc) {
+		Class.forName("com.mysql.jdbc.Driver");
+		return null;
+	}
+
+	@Override
+	public void addFilm(Film f) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
