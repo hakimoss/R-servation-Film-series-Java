@@ -1,0 +1,10 @@
+package com.reservation.Profil;
+
+import java.io.Serializable;
+
+public class Profil implements Serializable {
+	private int idProfil;
+	private String name;
+	private int score;
+
+}

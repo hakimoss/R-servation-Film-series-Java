@@ -1,0 +1,17 @@
+package com.reservation;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class DeleteProfil extends JFrame {
+	JPanel panel;
+	JLabel label;
+	
+	
+	public DeleteProfil() {
+		
+		label=new JLabel("bonjour");
+		this.add(label);
+	}
+}

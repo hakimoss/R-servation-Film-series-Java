@@ -1,0 +1,26 @@
+package com.reservation.Profil;
+
+import java.util.List;
+
+
+public class CatalogueProfil implements ICatalogueProfil {
+
+	@Override
+	public List<Profil> profilParMc(String mc) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addProfil(Profil p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteProfil(Profil p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

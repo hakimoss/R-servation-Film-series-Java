@@ -1,0 +1,104 @@
+package com.reservation;
+
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+
+import javax.swing.KeyStroke;
+
+public class Page2 extends JPanel {
+	
+	//JPanel panelPage2=new JPanel();
+	JLabel labelTest=new JLabel("Bonjour");
+	
+	
+	JMenuBar menuBar;
+	JMenu menu;
+	JMenuItem addRemoveMenu, homeMenu;
+
+	
+	public Page2() {
+		
+		
+		//panelPage2.setLayout(new FlowLayout());
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());		
+		this.add(labelTest);
+		//this.setVisible(true);
+		
+		
+		
+		
+		menuBar = new JMenuBar();
+		
+		//Build the first menu.
+		menu = new JMenu("Menu");
+		menu.setMnemonic(KeyEvent.VK_A);
+		menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+		menuBar.add(menu);
+
+		//a group of JMenuItems
+		addRemoveMenu = new JMenuItem("Add/Remove",KeyEvent.VK_T);
+		addRemoveMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		addRemoveMenu.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+		menu.add(addRemoveMenu);
+		
+		
+		homeMenu = new JMenuItem("View List",KeyEvent.VK_T);
+		homeMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		homeMenu.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+		menu.add(homeMenu);
+		
+		
+		
+		
+		JPanel page2 = this;
+		
+		
+		homeMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+			
+		});
+		
+		addRemoveMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				page2.removeAll();
+			
+				
+				page2.repaint();
+			
+				
+				page2.revalidate();
+			
+				CatalogueSWING catalogue=new CatalogueSWING();
+				catalogue.add(catalogue.jPanelC);
+				catalogue.add(catalogue.jPanelS);
+				catalogue.add(catalogue.jPanelN);
+				
+			
+				
+				catalogue.setVisible(true);
+				
+			}
+			
+		});
+		
+	}
+
+
+	
+}

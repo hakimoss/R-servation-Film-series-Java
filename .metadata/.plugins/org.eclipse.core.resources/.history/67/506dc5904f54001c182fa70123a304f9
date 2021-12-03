@@ -1,0 +1,32 @@
+package com.reservation;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class DeleteProfil extends JFrame {
+	JPanel panelC;
+	JPanel panelS;
+	JLabel label;
+	
+	
+	public DeleteProfil() {
+		panelC=new JPanel();
+		panelS=new JPanel();
+		
+		this.add(panelC, BorderLayout.CENTER);
+		this.add(panelS, BorderLayout.SOUTH);
+		
+		label=new JLabel("bonjour");
+		this.add(label);
+		this.setSize(400, 200);
+		
+		
+		
+		
+		
+		this.setVisible(true);
+	}
+}

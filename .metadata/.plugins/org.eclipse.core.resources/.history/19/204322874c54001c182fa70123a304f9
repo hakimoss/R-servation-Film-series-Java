@@ -1,0 +1,30 @@
+package com.reservation;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class CreateProfil extends JFrame {
+	
+	JPanel panel;
+	JLabel label;
+	
+	
+	
+	JButton btnCreate;
+	
+	
+	
+	
+	
+	public CreateProfil() {
+		label = new JLabel("Page Profil");
+		this.add(label);
+		this.setSize(400, 200);
+		
+		this.setVisible(true);
+		
+		
+		
+	}
+}

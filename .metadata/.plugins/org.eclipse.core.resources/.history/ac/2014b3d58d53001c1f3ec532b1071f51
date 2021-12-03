@@ -1,0 +1,23 @@
+package com.reservation;
+
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Page2 extends JFrame {
+	
+	JPanel panelPage2=new JPanel();
+	
+	public Page2() {
+		this.add(panelPage2);
+		
+		//panelPage2.setLayout(new FlowLayout());
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());		
+		this.setVisible(true);
+	}
+
+
+	
+}

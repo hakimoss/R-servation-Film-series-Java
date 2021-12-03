@@ -1,0 +1,53 @@
+package com.reservation.Profil;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.reservation.AVisioner.Film;
+
+
+public class CatalogueProfil implements ICatalogueProfil {
+	
+	@Override
+	public List<Profil> profilParMc(String mc) {
+		List<Profil> profils = new ArrayList<Profil>();
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/reservation_film_series", "root", "");
+			PreparedStatement ps = conn.prepareStatement("select * from reservation where name like ?");
+			ps.setString(1, "%"+mc+"%");
+			ResultSet rs =ps.executeQuery();
+			while(rs.next()) {
+				Profil p = new Profil();
+				p.setIdProfil(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				p.setScore(rs.getInt("film_series"));
+				profils.add(p);
+				
+			}
+			ps.close();conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return films;
+	}
+
+	@Override
+	public void addProfil(Profil p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteProfil(Profil p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

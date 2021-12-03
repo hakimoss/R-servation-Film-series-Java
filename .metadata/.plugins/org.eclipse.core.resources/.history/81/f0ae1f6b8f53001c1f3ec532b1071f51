@@ -1,0 +1,24 @@
+package com.reservation;
+
+import java.awt.Toolkit;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class Page2 extends JPanel {
+	
+	//JPanel panelPage2=new JPanel();
+	JLabel labelTest=new JLabel("Bonjour");
+	
+	public Page2() {
+		
+		
+		//panelPage2.setLayout(new FlowLayout());
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());		
+		this.add(labelTest);
+		//this.setVisible(true);
+	}
+
+
+	
+}

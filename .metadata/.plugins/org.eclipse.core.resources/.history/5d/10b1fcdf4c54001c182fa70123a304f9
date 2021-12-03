@@ -1,0 +1,48 @@
+package com.reservation;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class CreateProfil extends JFrame {
+	
+	JPanel panelC;
+	JPanel panelS;
+	JLabel label;
+	
+	
+	
+	JButton btnCreate;
+	
+	
+	
+	
+	
+	public CreateProfil() {
+		panelC = new JPanel();
+		label = new JLabel("Page Profil");
+		this.add(panelC);
+		this.setSize(400, 200);
+		panelC.add(label);
+		
+		
+		btnCreate = new JButton("Create Profil");
+		
+		
+		panelS.add(btnCreate);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		this.setVisible(true);
+		
+		
+		
+	}
+}

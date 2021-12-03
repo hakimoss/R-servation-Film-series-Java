@@ -1,0 +1,55 @@
+package com.reservation;
+
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.KeyStroke;
+
+public class Page2 extends JPanel {
+	
+	//JPanel panelPage2=new JPanel();
+	JLabel labelTest=new JLabel("Bonjour");
+	
+	
+	JMenuBar menuBar;
+	JMenu menu;
+	JMenuItem menuItem;
+
+	
+	public Page2() {
+		
+		
+		//panelPage2.setLayout(new FlowLayout());
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());		
+		this.add(labelTest);
+		//this.setVisible(true);
+		
+		
+		
+		
+		menuBar = new JMenuBar();
+		
+		//Build the first menu.
+		menu = new JMenu("Menu");
+		menu.setMnemonic(KeyEvent.VK_A);
+		menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+		menuBar.add(menu);
+		
+		//a group of JMenuItems
+		menuItem = new JMenuItem("Add/Remove",KeyEvent.VK_T);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuItem.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+		menu.add(menuItem);
+	}
+
+
+	
+}

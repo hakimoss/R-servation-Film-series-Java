@@ -1,0 +1,58 @@
+package com.reservation;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class CreateProfil extends JFrame {
+	
+	JPanel panelC;
+	JPanel panelS;
+	JLabel label;
+	
+	JTextField textFieldName;
+	
+	
+	
+	
+	JButton btnCreate;
+	
+	
+	
+	
+	
+	public CreateProfil() {
+		panelC = new JPanel();
+		panelS = new JPanel();
+		label = new JLabel("Page Profil");
+		btnCreate = new JButton("Create Profil");
+		textFieldName = new TextField();
+		
+		this.add(panelC, BorderLayout.CENTER);
+		this.add(panelS, BorderLayout.SOUTH);
+		this.setSize(400, 200);
+		
+		
+		panelC.add(label);
+		panelC.add()
+		
+		panelS.add(btnCreate);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		this.setVisible(true);
+		
+		
+		
+	}
+}

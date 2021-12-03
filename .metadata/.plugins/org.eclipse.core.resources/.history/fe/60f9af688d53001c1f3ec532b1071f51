@@ -1,0 +1,19 @@
+package com.reservation;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Page2 extends JFrame {
+	
+	JPanel panelPage2=new JPanel();
+	
+	public Page2() {
+		this.add(panelPage2);
+		
+		
+		
+	}
+
+
+	
+}

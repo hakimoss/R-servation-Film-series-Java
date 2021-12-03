@@ -1,0 +1,7 @@
+package com.reservation;
+
+import javax.swing.JFrame;
+
+public class DeleteProfil extends JFrame {
+	
+}

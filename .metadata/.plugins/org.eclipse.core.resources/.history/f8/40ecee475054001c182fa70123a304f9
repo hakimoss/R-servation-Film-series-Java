@@ -1,0 +1,66 @@
+package com.reservation;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.reservation.AVisioner.CatalogueFilm;
+import com.reservation.AVisioner.Film;
+import com.reservation.Profil.Profil;
+
+public class DeleteProfil extends JFrame {
+	JPanel panelC;
+	JPanel panelS;
+	JLabel label;
+	JTextField textFieldId;
+	JButton btnDelete;
+	
+	
+	public DeleteProfil() {
+		panelC=new JPanel();
+		panelS=new JPanel();
+		
+		this.add(panelC, BorderLayout.CENTER);
+		this.add(panelS, BorderLayout.SOUTH);
+		this.setSize(400, 200);
+		
+		
+		label=new JLabel("Delete by ID :");
+		textFieldId = new JTextField(12);
+		
+		
+		panelC.add(label);
+		panelC.add(textFieldId);
+		
+		btnDelete = new JButton("Delete");
+		panelS.add(btnDelete);
+
+		
+		this.setVisible(true);
+		
+		btnDelete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int idValueDelete = Integer.parseInt(textFieldId.getText());				
+
+				Profil deleteProfil = new Profil();
+				deleteProfil.setIdProfil(idValueDelete);
+				CatalogueProfil profil=new CatalogueProfil();
+				film.deleteFilm(deleteFilm);
+				
+				idDelete.setText("");
+				frame.repaint();
+				
+			}
+			
+		});
+		
+	}
+}

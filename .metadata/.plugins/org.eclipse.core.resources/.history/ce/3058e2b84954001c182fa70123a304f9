@@ -1,0 +1,11 @@
+package com.reservation.Profil;
+
+import java.util.List;
+
+import com.reservation.AVisioner.Film;
+
+public interface ICatalogueProfil {
+	public List<Profil> profilParMc(String mc);
+	public void addProfil(Profil p);
+	public void deleteProfil(Profil p);
+}
