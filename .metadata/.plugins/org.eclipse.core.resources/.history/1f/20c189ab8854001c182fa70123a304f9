@@ -1,0 +1,31 @@
+package com.reservation;
+
+import java.awt.Toolkit;
+
+
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import com.reservation.Profil.CatalogueProfil;
+import com.reservation.Profil.ProfilModel;
+
+public class ManageProfil extends JPanel {
+	
+	private JTable jTableProfil;
+	private ProfilModel jtableModel;
+	
+	ManageProfil() {
+		
+		jtableModel = new ProfilModel();
+		jTableProfil = new JTable(jtableModel);
+		JScrollPane jTableScroll=new JScrollPane(jTableProfil);
+		
+		CatalogueProfil p=new CatalogueProfil();
+		jtableModel.setData(film.getAllFilm());
+		jtableModel.setData(profil.);
+		
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());	
+		this.add(jTableScroll);
+	}
+}

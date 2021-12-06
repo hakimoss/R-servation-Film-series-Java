@@ -1,0 +1,19 @@
+package com.reservation;
+
+import java.awt.Toolkit;
+
+
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
+public class ManageProfil extends JPanel {
+	
+	private JTable jTableFilm=new JTable();
+
+	
+	ManageProfil() {
+		
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());		
+		this.add(jTableFilm);
+	}
+}

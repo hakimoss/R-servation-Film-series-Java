@@ -1,0 +1,23 @@
+package com.reservation;
+
+import java.awt.Toolkit;
+
+
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
+import com.reservation.AVisioner.FilmModel;
+
+public class ManageProfil extends JPanel {
+	
+	private JTable jTableProfil;
+	private ProfilModel jtableModel;
+	
+	ManageProfil() {
+		
+		jTableProfil = new JTable();
+		
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());	
+		this.add(jTableProfil);
+	}
+}

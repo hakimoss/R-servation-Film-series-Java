@@ -7,6 +7,8 @@ public class Film implements Serializable {
 	private String name;
 	private String nomFilm;
 	private String source;
+	private int nombreMinute;
+
 	public int getIdFilm() {
 		return idFilm;
 	}
@@ -31,16 +33,22 @@ public class Film implements Serializable {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	
+	public int getNombreMinute() {
+		return nombreMinute;
+	}
+	public void setNombreMinute(int nombreMinute) {
+		this.nombreMinute = nombreMinute;
+	}
 	public Film() {
 		super();
 	}
-	public Film(String name, String nomFilm, String source) {
+	public Film(String name, String nomFilm, String source, int nombreMinute) {
 		super();
 		//this.idFilm = idFilm;
 		this.name = name;
 		this.nomFilm = nomFilm;
 		this.source = source;
+		this.nombreMinute = nombreMinute;
 	}
 	
 	

@@ -28,6 +28,7 @@ public class CatalogueFilm implements ICatalogueFilm {
 				f.setName(rs.getString("name"));
 				f.setNomFilm(rs.getString("film_series"));
 				f.setSource(rs.getString("sources"));
+				f.setNombreMinute(rs.getInt("dure"));
 				films.add(f);
 				
 			}
@@ -44,10 +45,11 @@ public class CatalogueFilm implements ICatalogueFilm {
 		try {
 			//Class.forName("com.mysql.jdbc.Driver");
 			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/reservation_film_series", "root", "");
-			PreparedStatement ps = conn.prepareStatement("insert into reservation(name,film_series,sources) value(?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("insert into reservation(name,film_series,sources,dure) value(?,?,?,?)");
 			ps.setString(1, f.getName());
 			ps.setString(2, f.getNomFilm());
 			ps.setString(3, f.getSource());
+			ps.setInt(4, f.getNombreMinute());
 			ps.executeUpdate();
 			ps.close();
 			conn.close();
@@ -91,6 +93,7 @@ public class CatalogueFilm implements ICatalogueFilm {
 				f.setName(rs.getString("name"));
 				f.setNomFilm(rs.getString("film_series"));
 				f.setSource(rs.getString("sources"));
+				f.setNombreMinute(rs.getInt("dure"));
 				films.add(f);
 			}
 		

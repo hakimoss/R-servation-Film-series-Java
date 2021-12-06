@@ -1,0 +1,48 @@
+package com.reservation;
+
+import java.awt.Toolkit;
+
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.Graphics;
+
+import com.reservation.Profil.CatalogueProfil;
+import com.reservation.Profil.ProfilModel;
+
+public class ManageProfil extends JPanel {
+	
+	private JTable jTableProfil;
+	private ProfilModel jtableModel;
+	public JPanel panel;
+	
+	
+	ManageProfil() {
+		
+		jtableModel = new ProfilModel();
+		jTableProfil = new JTable(jtableModel);
+		JScrollPane jTableScroll=new JScrollPane(jTableProfil);
+		
+		CatalogueProfil profil=new CatalogueProfil();
+		jtableModel.setData(profil.allProfil());
+	
+		
+		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());	
+		this.add(jTableScroll);
+		
+		panel = this;
+		
+		
+	}
+	@Override
+    public void paintComponent(Graphics g) 
+    {
+        super.paintComponent(g);
+        Image img = Toolkit.getDefaultToolkit().createImage("/corvette.jpg");
+        //Image img = new ImageIcon("/corvette.jpg");
+ 
+        g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), null);
+    }
+}

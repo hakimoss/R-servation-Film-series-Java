@@ -1,5 +1,0 @@
-package com.reservation.AVisioner;
-
-public interface ICatalogueFilm {
-	public List<Produit> produitsParMc(String mc);
-}

@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 public class FilmModel extends AbstractTableModel {
 	
-	private String[] nomColonnes=new String[] {"id", "NOM", "FILM", "SOURCES"};
+	private String[] nomColonnes=new String[] {"id", "NOM", "FILM", "SOURCES", "DURÉ(minute)"};
 	private List<String[]> tableValues=new ArrayList<String[]>();
 	
 	@Override
@@ -40,7 +40,9 @@ public class FilmModel extends AbstractTableModel {
 				""+f.getIdFilm(),
 				f.getName(),
 				f.getNomFilm(),
-				f.getSource()
+				f.getSource(),
+				""+f.getNombreMinute()
+				
 				
 			});
 		}

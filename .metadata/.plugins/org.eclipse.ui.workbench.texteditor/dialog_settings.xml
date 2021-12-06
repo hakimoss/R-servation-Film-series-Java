@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="jtableModel"/>
+		<item key="selection" value="Frame"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="jTableModel"/>
-			<item value="setJMenuBar"/>
-			<item value="this.menu"/>
-			<item value="error"/>
+			<item value="frame"/>
+			<item value="jtableModel"/>
+			<item value="jtable"/>
+			<item value="JTable "/>
+			<item value=" JTable "/>
+			<item value="private JTable "/>
+			<item value="Jtable"/>
+			<item value="system"/>
+			<item value="CatalogueFilm"/>
+			<item value="sourcesList"/>
+			<item value="sourceFilm"/>
+			<item value="profilList"/>
+			<item value="source"/>
+			<item value="panelC"/>
+			<item value="errorText"/>
 		</list>
 		<list key="replacehistory">
+			<item value="panelN"/>
+			<item value="frame"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="894"/>
-		<item key="DIALOG_Y_ORIGIN" value="215"/>
-		<item key="DIALOG_WIDTH" value="284"/>
-		<item key="DIALOG_HEIGHT" value="330"/>
+		<item key="DIALOG_X_ORIGIN" value="790"/>
+		<item key="DIALOG_Y_ORIGIN" value="368"/>
+		<item key="DIALOG_WIDTH" value="320"/>
+		<item key="DIALOG_HEIGHT" value="408"/>
 		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

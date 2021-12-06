@@ -7,10 +7,12 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.swing.JButton;
@@ -28,7 +30,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
-import javax.swing.table.DefaultTableModel;
 
 import com.reservation.AVisioner.CatalogueFilm;
 import com.reservation.AVisioner.Film;
@@ -49,11 +50,20 @@ public class CatalogueSWING extends JFrame {
 	private JTextField jTextFieldFilmAdd=new JTextField(12);
 	private JLabel jLabelSourceAdd=new JLabel("La source :");
 	private String[] sourceString = { "Neflix", "Disney", "Prime", "Streaming", "Autres" };
+	
+	
+	private boolean isSeries = false;
+	private JLabel jLabelSaisonAdd=new JLabel("Nombre de saison :");
+	private JTextField jTextFieldSaisonAdd=new JTextField(6);
+	private JLabel jLabelEpisodeParSaisonAdd=new JLabel("Nombre d'épisode par saison :");
+	private JTextField jTextFieldEpisodeParSaisonAdd=new JTextField(6);
+	private JLabel jLabelMinuteParEpisode=new JLabel("Nombre de minute par épisode:");
+	private JTextField jTextFieldMinuteParEpisode=new JTextField(6);
+	
 	CatalogueProfil allProfil=new CatalogueProfil();
 	
 	private JComboBox<String> sourcesList = new JComboBox(sourceString);	
 	private JButton jButtonAdd=new JButton("Add");
-	private JLabel errorText = new JLabel("");
 	
 	private JTextField idDelete = new JTextField(12);
 	private JButton btnDelete = new JButton("delete");
@@ -61,6 +71,7 @@ public class CatalogueSWING extends JFrame {
 	public JFrame frame;
 	
 	Page2 page2=new Page2();
+	ManageProfil manageProfil=new ManageProfil();
 	CreateProfil createProfilPage;
 	DeleteProfil deleteProfilPage;
 
@@ -98,7 +109,7 @@ public class CatalogueSWING extends JFrame {
 		String[] stringArray = profilList.toArray(new String[0]);
 		
 		JComboBox<String> profilFinal = new JComboBox(stringArray);	
-		
+		jPanelS.setBounds(0,200,getWidth(), 200);
 		
 		
 		jPanelS.add(jLabelNameAdd);
@@ -107,11 +118,19 @@ public class CatalogueSWING extends JFrame {
 		jPanelS.add(jTextFieldFilmAdd);
 		jPanelS.add(jLabelSourceAdd);
 		jPanelS.add(sourcesList);
-		jPanelS.add(jButtonAdd);
-		jPanelS.add(errorText);		
 		
-		jPanelS.add(idDelete);
-		jPanelS.add(btnDelete);
+		jPanelS.add(jLabelSaisonAdd);
+		jPanelS.add(jTextFieldSaisonAdd);
+		jPanelS.add(jLabelEpisodeParSaisonAdd);
+		jPanelS.add(jTextFieldEpisodeParSaisonAdd);
+		jPanelS.add(jLabelMinuteParEpisode);
+		jPanelS.add(jTextFieldMinuteParEpisode);
+		
+		jPanelS.add(jButtonAdd);
+	
+		
+		jPanelN.add(idDelete);
+		jPanelN.add(btnDelete);
 		
 		this.add(jPanelS, BorderLayout.SOUTH);
 		
@@ -156,10 +175,28 @@ public class CatalogueSWING extends JFrame {
 		JRootPane jRootPane = new JRootPane();
 		jRootPane.setDefaultButton(jButtonAdd); 
 		
+		
 
 		this.setVisible(true);
 		
 		frame=this;
+		
+		manageProfilMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.remove(jPanelC);
+				frame.remove(jPanelS);
+				frame.remove(jPanelN);
+				
+				frame.add(manageProfil);
+				
+				frame.repaint();				
+				frame.validate();	
+				
+			}
+			
+		});
 
 		homeMenu.addActionListener(new ActionListener() {
 
@@ -182,6 +219,7 @@ public class CatalogueSWING extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				frame.remove(page2);
+				frame.remove(manageProfil);
 
 				frame.add(jPanelC);
 				frame.add(jPanelN);
@@ -189,19 +227,16 @@ public class CatalogueSWING extends JFrame {
 				frame.add(jPanelS, BorderLayout.SOUTH);
 
 				frame.repaint();
-				frame.validate();		
-				
+				frame.validate();						
 			}
 			
 		});
-		
-		
+				
 		createProfilMenu.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				createProfilPage=new CreateProfil();
-				
+				createProfilPage=new CreateProfil();				
 			}
 			
 		});
@@ -210,14 +245,13 @@ public class CatalogueSWING extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				deleteProfilPage=new DeleteProfil();
-				
+				deleteProfilPage=new DeleteProfil();				
 			}
 			
 		});
 		
-		// add film
 		
+		// add film
 		jButtonAdd.addActionListener(new ActionListener() {
 
 			@Override
@@ -226,31 +260,55 @@ public class CatalogueSWING extends JFrame {
 				String valueName = (String) profilFinal.getSelectedItem();
 				String valueFilm = jTextFieldFilmAdd.getText();
 				String sourceFilm = (String) sourcesList.getSelectedItem();
+				
+				String valueSaison = jTextFieldSaisonAdd.getText();
+				String valueEpisode = jTextFieldEpisodeParSaisonAdd.getText();
+				String valueMinute = jTextFieldMinuteParEpisode.getText();
+				
 				if(valueName == null) {
-					errorText.setText("<html><p style='color:red;font-weight:900;'>Veuillez crée un profil</p></html>");							
-					CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(() -> {
-						errorText.setText("");
-					});
+					JOptionPane.showMessageDialog(null, "Veuillez crée un profil et le selectionner");
 					return;
 				}
-				if (valueFilm.equals("") || sourceFilm.equals("")) {
-					errorText.setText("<html><p style='color:red;font-weight:900;'>Veuillez remplir tous les champs</p></html>");							
-					CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(() -> {
-						errorText.setText("");
-					});
+				if (valueFilm.equals("") || sourceFilm.equals("") || valueSaison.equals("") || valueEpisode.equals("") || valueMinute.equals("")) {
+					JOptionPane.showMessageDialog(null, "Veuillez remplire tous les champs");
 					return;
 				}
 				
+				int intValueSaison = Integer.parseInt(valueSaison);
+				int intValueEpisode = Integer.parseInt(valueEpisode);
+				int intValueMinute = Integer.parseInt(valueMinute);
+				
+				
+				
+				int MinutePourSaison = calculeMinuteSaison(intValueSaison, intValueEpisode, intValueMinute);
 						
-				Film filmAjouter = new Film(valueName, valueFilm, sourceFilm);
+				Film filmAjouter = new Film(valueName, valueFilm, sourceFilm, MinutePourSaison);
 				
 				CatalogueFilm film=new CatalogueFilm();
 				film.addFilm(filmAjouter);
+				
+
+				try {
+					//Class.forName("com.mysql.jdbc.Driver");
+					Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/reservation_film_series", "root", "");
+					PreparedStatement ps = conn.prepareStatement("update profils set score = '"+(getScore(valueName)+MinutePourSaison)+"' where name = '"+valueName+"'");
+					//ps.setInt(1, MinutePourSaison);
+					
+					ps.executeUpdate();
+					ps.close();
+					conn.close();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				
 				jtableModel.setData(film.getAllFilm());
 				jTextFieldNameAdd.setText("");
 				jTextFieldFilmAdd.setText("");
+				jTextFieldSaisonAdd.setText("");
+				jTextFieldEpisodeParSaisonAdd.setText("");
+				jTextFieldMinuteParEpisode.setText("");
 				
 				JOptionPane.showMessageDialog(null, "Database Updated");
 			}
@@ -265,13 +323,32 @@ public class CatalogueSWING extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				int idValueDelete = Integer.parseInt(idDelete.getText());				
+				int idValueDelete = Integer.parseInt(idDelete.getText());		
+				
+				String nameToDelete = getNameParId(idValueDelete);
+				int score = getScore(getNameParId(idValueDelete));
+				int duration = getDuration(idValueDelete);
+				int totalApres = score - duration;
+
+				try {
+					//Class.forName("com.mysql.jdbc.Driver");
+					Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/reservation_film_series", "root", "");
+					PreparedStatement ps = conn.prepareStatement("update profils set score = '"+totalApres+"' where name = '"+nameToDelete+"'");
+					//ps.setInt(1, MinutePourSaison);
+					ps.executeUpdate();
+					ps.close();
+					conn.close();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 				Film deleteFilm = new Film();
 				deleteFilm.setIdFilm(idValueDelete);
 				CatalogueFilm film=new CatalogueFilm();
 				film.deleteFilm(deleteFilm);
 				
+
 				jtableModel.setData(film.getAllFilm());
 				idDelete.setText("");
 				frame.repaint();				
@@ -293,7 +370,82 @@ public class CatalogueSWING extends JFrame {
 			}
 			
 		});
+		
+		
 	
+	}
+	
+	private int calculeMinuteSaison(int nbSaison, int nbEpisode, int nbMinuteParEpisode) {
+		int totalEpisode = nbSaison * nbEpisode;
+		int totalMinute = totalEpisode * nbMinuteParEpisode;
+		
+		
+	
+		return totalMinute;
+	}
+	
+	private int getScore(String name) {
+		
+		int scoreData = 0;
+		try {
+			//Class.forName("com.mysql.jdbc.Driver");
+			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/reservation_film_series", "root", "");
+			PreparedStatement ps = conn.prepareStatement("select score from profils where name = '"+name+"'");
+			//ps.setInt(1, MinutePourSaison);
+			ResultSet rs =ps.executeQuery();
+			while(rs.next()) {
+				scoreData = rs.getInt("score");
+			}
+			ps.close();
+			conn.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return scoreData;
+	}
+	
+	private String getNameParId(int idFilm) {
+		String name = null;
+		try {
+			//Class.forName("com.mysql.jdbc.Driver");
+			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/reservation_film_series", "root", "");
+			PreparedStatement ps = conn.prepareStatement("select name from reservation where id = '"+idFilm+"'");
+			//ps.setInt(1, MinutePourSaison);
+			ResultSet rs =ps.executeQuery();
+			while(rs.next()) {
+				name = rs.getString("name");
+			}
+			ps.close();
+			conn.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return name;
+	}
+	
+	private int getDuration(int idFilm) {
+		int duration = 0;
+		try {
+			//Class.forName("com.mysql.jdbc.Driver");
+			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/reservation_film_series", "root", "");
+			PreparedStatement ps = conn.prepareStatement("select dure from reservation where id = '"+idFilm+"'");
+			//ps.setInt(1, MinutePourSaison);
+			ResultSet rs =ps.executeQuery();
+			while(rs.next()) {
+				duration = rs.getInt("dure");
+			}
+			ps.close();
+			conn.close();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return duration;
 	}
 	
 }
