@@ -75,9 +75,12 @@ public class CreateProfil extends JFrame {
 				catalogueProfil.addProfil(profil);
 				
 				
+				
 				textFieldName.setText("");
 				setVisible(false);
 				JOptionPane.showMessageDialog(null, "Profil Created");
+				
+				
 				
 			}
 			

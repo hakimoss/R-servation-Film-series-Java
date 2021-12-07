@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -19,13 +18,8 @@ public class ManageProfil extends JPanel {
 	
 	private JTable jTableProfil;
 	private ProfilModel jtableModel;
-	
-	
-	
-	
 
 	ManageProfil() {
-		
 		jtableModel = new ProfilModel();
 		jTableProfil = new JTable(jtableModel);
 		JScrollPane jTableScroll=new JScrollPane(jTableProfil);
@@ -37,9 +31,9 @@ public class ManageProfil extends JPanel {
 		this.setSize(Toolkit.getDefaultToolkit().getScreenSize());	
 		this.add(jTableScroll);
 
-		
-		
 	}
+	
+	
 	@Override
 	  protected void paintComponent(Graphics g) {
 
@@ -53,7 +47,12 @@ public class ManageProfil extends JPanel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+	        getAllProfil();
 			
-			
+	}
+
+	public void getAllProfil() {
+		CatalogueProfil profil=new CatalogueProfil();
+		jtableModel.setData(profil.allProfil());
 	}
 }
